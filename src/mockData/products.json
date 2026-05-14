@@ -1,0 +1,29 @@
+ [
+ {
+    "id": 1,
+    "title": "Classic Black T Shirt",
+    "price": 499,
+    "description": "Comfortable cotton t shirt for daily wear.",
+    "images": [
+      "https://i.imgur.com/9LFjwpI.jpeg"
+    ]
+  },
+  {
+    "id": 2,
+    "title": "Running Shoes",
+    "price": 1999,
+    "description": "Lightweight running shoes with soft cushioning.",
+    "images": [
+      "https://i.imgur.com/R2PN9Wq.jpeg"
+    ]
+  },
+  {
+    "id": 3,
+    "title": "Smart Watch",
+    "price": 3499,
+    "description": "Smart watch with fitness tracking features.",
+    "images": [
+      "https://i.imgur.com/xPDwUb3.jpeg"
+    ]
+  }
+]
