@@ -9,32 +9,36 @@ function Home() {
   const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("");
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   useEffect(() => {
-    loadCategories();
+    fetchCategories();
   }, []);
 
-useEffect(() => {
-  const loadProducts = async () => {
-    try {
-      setLoading(true);
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        setLoading(true);
+        setError("");
 
-      const data = await getProducts(selectedCategory);
+        const data = await getProducts(selectedCategory);
 
-      setProducts(data);
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setLoading(false);
-    }
-  };
+        setProducts(data);
+      } catch (error) {
+        console.log(error);
+        setError("Unable to load products");
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  loadProducts();
-}, [selectedCategory]);
+    fetchProducts();
+  }, [selectedCategory]);
 
-  const loadCategories = async () => {
+  const fetchCategories = async () => {
     try {
       const data = await getCategories();
+
       setCategories(data);
     } catch (error) {
       console.log(error);
@@ -42,36 +46,97 @@ useEffect(() => {
   };
 
   return (
-    <div style={{ padding: "20px" }}>
-      <h1>E-Commerce Store</h1>
-
-      <CategoryFilter
-        categories={categories}
-        selected={selectedCategory}
-        onChange={setSelectedCategory}
-      />
-
-      {loading ? (
-        <Loader />
-      ) : (
+    <section
+      style={{
+        padding: "30px 20px",
+        background: "#f5f5f5",
+        minHeight: "100vh"
+      }}
+    >
+      <div
+        style={{
+          maxWidth: "1300px",
+          margin: "0 auto"
+        }}
+      >
         <div
           style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
-            gap: "20px"
+            marginBottom: "25px"
           }}
         >
-          {products.map((product) => {
-            return (
-              <ProductCard
-                key={product.id}
-                product={product}
-              />
-            );
-          })}
+          <h1
+            style={{
+              marginBottom: "10px",
+              color: "#222"
+            }}
+          >
+            Explore Products
+          </h1>
+
+          <p
+            style={{
+              color: "#666",
+              margin: 0
+            }}
+          >
+            Browse products and add your favourite items to cart.
+          </p>
         </div>
-      )}
-    </div>
+
+        <CategoryFilter
+          categories={categories}
+          selected={selectedCategory}
+          onChange={setSelectedCategory}
+        />
+
+        {loading && <Loader />}
+
+        {!loading && error && (
+          <div
+            style={{
+              textAlign: "center",
+              padding: "40px 20px"
+            }}
+          >
+            <h2>{error}</h2>
+          </div>
+        )}
+
+        {!loading && !error && products.length === 0 && (
+          <div
+            style={{
+              textAlign: "center",
+              padding: "40px 20px"
+            }}
+          >
+            <h2>No products found</h2>
+
+            <p>Try changing the selected category.</p>
+          </div>
+        )}
+
+        {!loading && !error && products.length > 0 && (
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns:
+                "repeat(auto-fit, minmax(260px, 1fr))",
+              gap: "22px",
+              marginTop: "25px"
+            }}
+          >
+            {products.map((product) => {
+              return (
+                <ProductCard
+                  key={product.id}
+                  product={product}
+                />
+              );
+            })}
+          </div>
+        )}
+      </div>
+    </section>
   );
 }
 

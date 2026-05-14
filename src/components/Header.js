@@ -21,7 +21,8 @@ function Header() {
         position: "sticky",
         top: 0,
         zIndex: 1000,
-        boxSizing: "border-box"
+        boxSizing: "border-box",
+        boxShadow: "0 2px 8px rgba(0,0,0,0.08)",
       }}
     >
       <Link
@@ -30,7 +31,7 @@ function Header() {
           color: "white",
           textDecoration: "none",
           fontSize: "24px",
-          fontWeight: "bold"
+          fontWeight: "bold",
         }}
       >
         ShopKart
@@ -41,7 +42,7 @@ function Header() {
           display: "flex",
           alignItems: "center",
           gap: "20px",
-          position: "relative"
+          position: "relative",
         }}
       >
         <Link
@@ -49,7 +50,7 @@ function Header() {
           style={{
             color: "white",
             textDecoration: "none",
-            fontSize: "16px"
+            fontSize: "16px",
           }}
         >
           Home
@@ -65,162 +66,160 @@ function Header() {
               borderRadius: "20px",
               fontWeight: "bold",
               border: "none",
-              cursor: "pointer"
+              cursor: "pointer",
             }}
           >
             Cart: {cartStore.totalItems}
           </button>
 
-        {showCart && (
-  <div
-    style={{
-      position: "absolute",
-      top: "55px",
-      right: 0,
-      width: "340px",
-      background: "white",
-      color: "black",
-      padding: "20px",
-      borderRadius: "12px",
-      boxShadow: "0 4px 14px rgba(0,0,0,0.15)",
-      maxHeight: "420px",
-      overflowY: "auto"
-    }}
-  >
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "space-between",
-        alignItems: "center",
-        marginBottom: "15px"
-      }}
-    >
-      <h3
-        style={{
-          margin: 0
-        }}
-      >
-        My Cart
-      </h3>
-
-      <span
-        style={{
-          fontSize: "14px",
-          color: "#666"
-        }}
-      >
-        {cartStore.totalItems} Items
-      </span>
-    </div>
-
-    {cartStore.cartItems.length === 0 ? (
-      <div
-        style={{
-          textAlign: "center",
-          padding: "20px 0"
-        }}
-      >
-        <p>Your cart is empty</p>
-      </div>
-    ) : (
-      <>
-        {cartStore.cartItems.map((item, index) => {
-          return (
+          {showCart && (
             <div
-              key={index}
               style={{
-                borderBottom: "1px solid #eee",
-                paddingBottom: "14px",
-                marginBottom: "14px",
-                display: "flex",
-                gap: "12px",
-                alignItems: "center"
+                position: "absolute",
+                top: "55px",
+                right: 0,
+                width: "340px",
+                background: "white",
+                color: "black",
+                padding: "20px",
+                borderRadius: "12px",
+                boxShadow: "0 4px 14px rgba(0,0,0,0.15)",
+                maxHeight: "420px",
+                overflowY: "auto",
               }}
             >
-              <img
-                src={item.images?.[0]}
-                alt={item.title}
-                style={{
-                  width: "65px",
-                  height: "65px",
-                  objectFit: "cover",
-                  borderRadius: "8px"
-                }}
-              />
-
               <div
                 style={{
-                  flex: 1
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  marginBottom: "15px",
                 }}
               >
-                <p
+                <h3
                   style={{
                     margin: 0,
-                    fontWeight: "600",
-                    fontSize: "14px",
-                    lineHeight: "1.4"
                   }}
                 >
-                  {item.title}
-                </p>
-<p
-  style={{
-    margin: "6px 0",
-    color: "#555",
-    fontSize: "14px"
-  }}
->
-  ₹ {item.price} × {item.quantity}
-</p>
+                  My Cart
+                </h3>
 
-<p
-  style={{
-    margin: 0,
-    fontSize: "13px",
-    color: "#777"
-  }}
->
-  Quantity: {item.quantity}
-</p>
-
-                <button
-                  onClick={() =>
-                    cartStore.removeFromCart(index)
-                  }
+                <span
                   style={{
-                    border: "none",
-                    background: "transparent",
-                    color: "red",
-                    cursor: "pointer",
-                    padding: 0,
-                    fontSize: "13px"
+                    fontSize: "14px",
+                    color: "#666",
                   }}
                 >
-                  Remove
-                </button>
+                  {cartStore.totalItems} Items
+                </span>
               </div>
+
+              {cartStore.cartItems.length === 0 ? (
+                <div
+                  style={{
+                    textAlign: "center",
+                    padding: "20px 0",
+                  }}
+                >
+                  <p>Your cart is empty</p>
+                </div>
+              ) : (
+                <>
+                  {cartStore.cartItems.map((item, index) => {
+                    return (
+                      <div
+                        key={index}
+                        style={{
+                          borderBottom: "1px solid #eee",
+                          paddingBottom: "14px",
+                          marginBottom: "14px",
+                          display: "flex",
+                          gap: "12px",
+                          alignItems: "center",
+                        }}
+                      >
+                        <img
+                          src={item.images?.[0]}
+                          alt={item.title}
+                          style={{
+                            width: "65px",
+                            height: "65px",
+                            objectFit: "cover",
+                            borderRadius: "8px",
+                          }}
+                        />
+
+                        <div
+                          style={{
+                            flex: 1,
+                          }}
+                        >
+                          <p
+                            style={{
+                              margin: 0,
+                              fontWeight: "600",
+                              fontSize: "14px",
+                              lineHeight: "1.4",
+                            }}
+                          >
+                            {item.title}
+                          </p>
+                          <p
+                            style={{
+                              margin: "6px 0",
+                              color: "#555",
+                              fontSize: "14px",
+                            }}
+                          >
+                            ₹ {item.price} × {item.quantity}
+                          </p>
+
+                          <p
+                            style={{
+                              margin: 0,
+                              fontSize: "13px",
+                              color: "#777",
+                            }}
+                          >
+                            Quantity: {item.quantity}
+                          </p>
+
+                          <button
+                            onClick={() => cartStore.removeFromCart(index)}
+                            style={{
+                              border: "none",
+                              background: "transparent",
+                              color: "red",
+                              cursor: "pointer",
+                              padding: 0,
+                              fontSize: "13px",
+                            }}
+                          >
+                            Remove
+                          </button>
+                        </div>
+                      </div>
+                    );
+                  })}
+
+                  <div
+                    style={{
+                      marginTop: "20px",
+                      borderTop: "1px solid #ddd",
+                      paddingTop: "15px",
+                      display: "flex",
+                      justifyContent: "space-between",
+                      fontWeight: "bold",
+                    }}
+                  >
+                    <span>Total</span>
+
+                    <span>₹ {cartStore.totalPrice}</span>
+                  </div>
+                </>
+              )}
             </div>
-          );
-        })}
-
-        <div
-          style={{
-            marginTop: "20px",
-            borderTop: "1px solid #ddd",
-            paddingTop: "15px",
-            display: "flex",
-            justifyContent: "space-between",
-            fontWeight: "bold"
-          }}
-        >
-          <span>Total</span>
-
-          <span>₹ {cartStore.totalPrice}</span>
-        </div>
-      </>
-    )}
-  </div>
-)}
+          )}
         </div>
       </div>
     </header>
