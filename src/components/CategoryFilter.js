@@ -30,7 +30,8 @@ function CategoryFilter({
               ? "#fff"
               : "#111",
           boxShadow:
-            "0 2px 8px rgba(0,0,0,0.08)"
+            "0 2px 8px rgba(0,0,0,0.08)",
+          transition: "0.3s"
         }}
       >
         All
@@ -41,7 +42,7 @@ function CategoryFilter({
           <button
             key={category.id}
             onClick={() =>
-              onChange(category.slug)
+              onChange(category.id)
             }
             style={{
               padding: "10px 16px",
@@ -49,15 +50,16 @@ function CategoryFilter({
               borderRadius: "30px",
               cursor: "pointer",
               background:
-                selected === category.slug
+                selected === category.id
                   ? "#111"
                   : "#fff",
               color:
-                selected === category.slug
+                selected === category.id
                   ? "#fff"
                   : "#111",
               boxShadow:
-                "0 2px 8px rgba(0,0,0,0.08)"
+                "0 2px 8px rgba(0,0,0,0.08)",
+              transition: "0.3s"
             }}
           >
             {category.name}

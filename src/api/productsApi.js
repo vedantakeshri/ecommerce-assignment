@@ -1,12 +1,15 @@
 import axios from "axios";
 
-const BASE_URL = "https://api.escuelajs.co/api/v1";
+const BASE_URL =
+  "https://api.escuelajs.co/api/v1";
 
-export const getProducts = async (categoryId = "") => {
+export const getProducts = async (
+  category = ""
+) => {
   let url = `${BASE_URL}/products`;
 
-  if (categoryId) {
-    url = `${BASE_URL}/categories/${categoryId}/products`;
+  if (category) {
+    url = `${BASE_URL}/categories/${category}/products`;
   }
 
   const response = await axios.get(url);
@@ -15,7 +18,9 @@ export const getProducts = async (categoryId = "") => {
 };
 
 export const getCategories = async () => {
-  const response = await axios.get(`${BASE_URL}/categories`);
+  const response = await axios.get(
+    `${BASE_URL}/categories`
+  );
 
   return response.data;
 };
