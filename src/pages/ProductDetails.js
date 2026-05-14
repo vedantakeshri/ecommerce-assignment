@@ -14,10 +14,7 @@ function ProductDetails() {
   const [loading, setLoading] = useState(true);
   const [quantity, setQuantity] = useState(1);
 
-  useEffect(() => {
-    fetchProductBySlug();
-  }, [slug]);
-
+useEffect(() => {
   const fetchProductBySlug = async () => {
     try {
       setLoading(true);
@@ -43,6 +40,9 @@ function ProductDetails() {
       setLoading(false);
     }
   };
+
+  fetchProductBySlug();
+}, [slug]);
 
   const handleAddToCart = () => {
     cartStore.addToCart({

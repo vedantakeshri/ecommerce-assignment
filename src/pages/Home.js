@@ -14,10 +14,7 @@ function Home() {
     loadCategories();
   }, []);
 
-  useEffect(() => {
-    loadProducts();
-  }, [selectedCategory]);
-
+useEffect(() => {
   const loadProducts = async () => {
     try {
       setLoading(true);
@@ -31,6 +28,9 @@ function Home() {
       setLoading(false);
     }
   };
+
+  loadProducts();
+}, [selectedCategory]);
 
   const loadCategories = async () => {
     try {
